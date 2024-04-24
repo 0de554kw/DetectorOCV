@@ -1,0 +1,25 @@
+// Model and weights are from https://github.com/chuanqi305/MobileNet-SSD/blob/master
+
+task downloadConfig(type: Download) {
+    src 'https://github.com/chuanqi305/MobileNet-SSD/blob/master/deploy.prototxt'
+    dest project.ext.ASSET_DIR + '/deploy.prototxt'
+    overwrite false
+}
+
+task downloadWeights(type: Download) {
+    src 'https://github.com/chuanqi305/MobileNet-SSD/blob/master/mobilenet_iter_73000.caffemodel'
+    dest project.ext.ASSET_DIR + '/mobilenet_iter_73000.caffemodel'
+    overwrite false
+}
+
+task copyConfig(type: Copy, dependsOn: downloadConfig) {
+    from project.ext.ASSET_DIR + '/deploy.prototxt'
+    into project.ext.TEST_ASSETS_DIR
+}
+
+task copyWeights(type: Copy, dependsOn: downloadWeights) {
+    from project.ext.ASSET_DIR + '/mobilenet_iter_73000.caffemodel'
+    into project.ext.TEST_ASSETS_DIR
+}
+
+preBuild.dependsOn downloadConfig, downloadWeights, copyConfig, copyWeights
