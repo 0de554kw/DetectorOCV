@@ -44,7 +44,7 @@ android {
 
 project.ext.ASSET_DIR = projectDir.toString() + '/src/main/assets'
 project.ext.TEST_ASSETS_DIR = projectDir.toString() + '/src/androidTest/assets'
-apply from:'download_models.gradle'
+//apply from:'download_models.gradle'
 
 dependencies {
     // Kotlin lang
